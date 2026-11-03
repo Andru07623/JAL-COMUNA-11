@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conoce más sobre la JAL - JAL Comuna 11</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Colores institucionales */
+        .bg-institucional {
+            background-color: #0033a0 !important;
+        }
+
+        .text-institucional {
+            color: #0033a0 !important;
+        }
+
+        .btn-institucional {
+            background-color: #0033a0;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-institucional:hover {
+            background-color: #001f66;
+            color: #ffffff;
+        }
+
+        /* HERO / encabezado de la página interna */
+        .page-hero {
+            background: linear-gradient(rgba(0, 51, 160, 0.92), rgba(0, 31, 102, 0.96)),
+                url('https://placehold.co/1920x600/0033a0/FFFFFF?text=Comuna+11');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Menú lateral de pestañas (nav pills mejorado) */
+        #v-pills-tab .nav-link {
+            color: #495057;
+            border-radius: 0.75rem;
+            padding: 0.85rem 1rem;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 4px solid transparent;
+        }
+
+        #v-pills-tab .nav-link:hover {
+            background-color: #eef2ff;
+            color: #0033a0;
+        }
+
+        #v-pills-tab .nav-link.active {
+            background-color: #0033a0 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0.4rem 0.9rem rgba(0, 51, 160, 0.25);
+        }
+
+        #v-pills-tab .nav-link i {
+            width: 22px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        /* Animación suave al cambiar de pestaña */
+        .tab-pane.active {
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-pane:focus {
+            outline: none !important;
+        }
+
+        /* Acordeones estilizados */
+        .accordion-button:not(.collapsed) {
+            background-color: #eef2ff;
+            color: #0033a0;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 51, 160, 0.25);
+        }
+
+        /* Tarjetas de información interna */
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* ====== ORGANIGRAMA (HTML/CSS, responsive) ====== */
+        .organigrama {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Cada nivel del organigrama */
+        .org-nivel {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Tarjeta de cada cargo */
+        .org-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #0033a0;
+            border-radius: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            min-width: 210px;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .org-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 51, 160, 0.15);
+        }
+
+        /* Tarjeta principal (Presidente) resaltada */
+        .org-card-top {
+            background-color: #0033a0;
+            border-color: #0033a0;
+            color: #ffffff;
+        }
+
+        .org-card i {
+            font-size: 1.4rem;
+            color: #0033a0;
+        }
+
+        .org-card-top i {
+            color: #ffffff;
+        }
+
+        .org-cargo {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.1;
+        }
+
+        .org-nombre {
+            display: block;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .org-card-top .org-nombre {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* Líneas conectoras verticales entre niveles */
+        .org-conector-v {
+            width: 2px;
+            height: 28px;
+            background-color: #cbd5e1;
+        }
+
+        /* En pantallas pequeñas: todo en columna */
+        @media (max-width: 575.98px) {
+            .org-nivel-multiple {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .org-card {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- LOGO JAL -->
+            <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+                <img src="./IMAGES/logo.png" alt="Logo JAL Comuna 11 Medellín" height="50" width="60">
+            </a>
+
+            <!-- BOTÓN NAVEGACIÓN CELULAR -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarJAL"
+                aria-controls="navbarJAL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <div class="collapse navbar-collapse" id="navbarJAL">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="index.html">Inicio</a>
+                    </li>
+
+                    <!-- DESPLEGABLE 1: La JAL -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            La JAL
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./Significadojal.html#entidad">¿Qué es la JAL?</a></li>
+                            <li><a class="dropdown-item" href="./Significadojal.html#funciones">Funciones</a></li>
+                            <li><a class="dropdown-item" href="./Significadojal.html#integrantes">Integrantes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- DESPLEGABLE 2: Transparencia -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="transparenciaDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Transparencia
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="transparenciaDropdown">
+                            <li><a class="dropdown-item" href="#entidad">Información de la Entidad</a></li>
+                            <li><a class="dropdown-item" href="#funciones">Funciones</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- BOTÓN PQRS -->
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-institucional rounded-pill px-4 fw-bold shadow-sm"
+                            href="pqrs.html">Radicar PQRS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow-1" style="padding-top: 76px;">
+
+        <!-- HERO INTERNO -->
+        <section class="page-hero text-white py-5 text-center">
+            <div class="container py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-3">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Conoce la JAL</li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold mb-2">Conoce más sobre la JAL</h1>
+                <p class="lead text-white-50 mb-0 mx-auto" style="max-width: 650px;">
+                    Toda la información de la Junta Administradora Local de la Comuna 11, organizada y al alcance de la ciudadanía.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTENIDO CON PESTAÑAS -->
+        <section class="py-5">
+            <div class="container py-2">
+                <div class="row g-4">
+
+                    <!-- COLUMNA IZQUIERDA: Menú de tópicos (Nav Pills mejorado) -->
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="position-sticky" style="top: 100px;">
+                            <h2 class="h6 text-uppercase text-muted fw-bold mb-3 ps-1" style="letter-spacing: 1px;">
+                                Explora las secciones
+                            </h2>
+                            <div class="nav flex-column nav-pills bg-white shadow-sm rounded-4 p-2 border"
+                                id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                                <button class="nav-link active fw-semibold mb-1" id="entidad-tab" data-bs-toggle="pill"
+                                    data-bs-target="#entidad" type="button" role="tab" aria-controls="entidad"
+                                    aria-selected="true">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                    <span>¿Qué es la JAL?</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold mb-1" id="funciones-tab" data-bs-toggle="pill"
+                                    data-bs-target="#funciones" type="button" role="tab" aria-controls="funciones"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                    <span>Funciones</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold mb-1" id="integrantes-tab" data-bs-toggle="pill"
+                                    data-bs-target="#integrantes" type="button" role="tab" aria-controls="integrantes"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span>Integrantes</span>
+                                </button>
+
+                                <button class="nav-link fw-semibold" id="planeacion-tab" data-bs-toggle="pill"
+                                    data-bs-target="#planeacion" type="button" role="tab" aria-controls="planeacion"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                    <span>por definir</span>
+                                </button>
+
+                            </div>
+
+                            <!-- Tarjeta de ayuda / contacto rápido -->
+                            <div class="card border-0 shadow-sm rounded-4 mt-4 bg-institucional text-white">
+                                <div class="card-body p-4">
+                                    <i class="fa-solid fa-circle-question fs-3 mb-2"></i>
+                                    <h3 class="h6 fw-bold">¿Tienes dudas?</h3>
+                                    <p class="small text-white-50 mb-3">Radica tu petición y te responderemos en los tiempos de ley.</p>
+                                    <a href="pqrs.html" class="btn btn-light btn-sm rounded-pill fw-bold text-institucional w-100">
+                                        Radicar PQRS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA DERECHA: Contenido (Tab Content) -->
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="tab-content bg-white p-4 p-lg-5 rounded-4 shadow-sm border-top border-4 border-primary h-70"
+                            id="v-pills-tabContent">
+
+                            <!-- CONTENIDO 1: Información de la Entidad -->
+                            <div class="tab-pane fade show active" id="entidad" role="tabpanel"
+                                aria-labelledby="entidad-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 1</span>
+                                <h2 class="fw-bold text-institucional mb-2">¿Qué es la JAL?</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted">
+                                    Una JAL (Junta Administradora Local) es una corporación pública de carácter administrativo 
+                                    y de elección popular en Colombia, encargada de representar a los ciudadanos en el nivel 
+                                    territorial más cercano, como las comunas (en zonas urbanas) y los corregimientos (en zonas rurales)
+                                </p>
+
+
+                            </div>
+
+                            <!-- CONTENIDO 2: funciones -->
+                            <div class="tab-pane fade" id="funciones" role="tabpanel" aria-labelledby="funciones-tab"
+                                tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 2</span>
+                                <h2 class="fw-bold text-institucional mb-2">Funciones</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                        <li class="d-flex align-items-start gap-3">
+                                            <i class="fa-solid fa-circle-check text-institucional fs-5 mt-1"></i>
+                                            <span class="text-muted">Control político local y veeduría ciudadana.</span>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3">
+                                            <i class="fa-solid fa-circle-check text-institucional fs-5 mt-1"></i>
+                                            <span class="text-muted">Priorización de recursos en Presupuesto Participativo.</span>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3">
+                                            <i class="fa-solid fa-circle-check text-institucional fs-5 mt-1"></i>
+                                            <span class="text-muted">Elaboración y seguimiento del Plan de Desarrollo Local.</span>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3">
+                                            <i class="fa-solid fa-circle-check text-institucional fs-5 mt-1"></i>
+                                            <span class="text-muted">Atención y recepción de PQRS comunitarias.</span>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </div>
+
+                            <!-- CONTENIDO 3: Integrantes (Organigrama + Cards) -->
+                            <div class="tab-pane fade" id="integrantes" role="tabpanel"
+                                aria-labelledby="integrantes-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 3</span>
+                                <h2 class="fw-bold text-institucional mb-2">Integrantes de la JAL</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    Conoce la estructura de la corporación y a los ediles elegidos democráticamente
+                                    para representar a la Comuna 11.
+                                </p>
+
+                                <!-- ====== ORGANIGRAMA ====== -->
+                                <h3 class="h5 fw-bold text-dark mb-3">
+                                    <i class="fa-solid fa-sitemap text-institucional me-2"></i> Organigrama
+                                </h3>
+
+                                <div class="organigrama mb-5">
+                                    <!-- Nivel 1: Presidente -->
+                                    <div class="org-nivel">
+                                        <div class="org-card org-card-top">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                            <div>
+                                                <span class="org-cargo">Presidente</span>
+                                                <span class="org-nombre">Nombre del Edil</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Conector vertical -->
+                                    <div class="org-conector-v"></div>
+
+                                    <!-- Nivel 2: Vicepresidente -->
+                                    <div class="org-nivel">
+                                        <div class="org-card">
+                                            <i class="fa-solid fa-user"></i>
+                                            <div>
+                                                <span class="org-cargo">Vicepresidente</span>
+                                                <span class="org-nombre">Nombre del Edil</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Conector vertical -->
+                                    <div class="org-conector-v"></div>
+
+                                    <!-- Nivel 3: Comisiones / Ediles -->
+                                    <div class="org-nivel org-nivel-multiple">
+                                        <div class="org-card">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                            <div>
+                                                <span class="org-cargo">Comisión 1</span>
+                                                <span class="org-nombre">Por definir</span>
+                                            </div>
+                                        </div>
+                                        <div class="org-card">
+                                            <i class="fa-solid fa-leaf"></i>
+                                            <div>
+                                                <span class="org-cargo">Comisión 2</span>
+                                                <span class="org-nombre">Por definir</span>
+                                            </div>
+                                        </div>
+                                        <div class="org-card">
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                            <div>
+                                                <span class="org-cargo">Comisión 3</span>
+                                                <span class="org-nombre">Por definir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ====== CARDS DE INTEGRANTES ====== -->
+                                <h3 class="h5 fw-bold text-dark mb-3">
+                                    <i class="fa-solid fa-id-card text-institucional me-2"></i> Directorio de Ediles
+                                </h3>
+
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+
+                                    <!-- Integrante (plantilla) - duplica este bloque por cada edil -->
+                                    <div class="col">
+                                        <div class="card info-card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center">
+                                            <img src="https://placehold.co/400x400/0033a0/FFF?text=Foto"
+                                                class="card-img-top" alt="Foto del edil">
+                                            <div class="card-body p-4">
+                                                <h4 class="h6 fw-bold mb-1">Nombre del Edil</h4>
+                                                <p class="text-institucional small fw-bold mb-2">Presidente</p>
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill mb-3">Movimiento / Partido</span>
+                                                <ul class="list-unstyled small text-muted d-flex flex-column gap-2 mb-3 text-start">
+                                                    <li><i class="fa-solid fa-envelope text-institucional me-2"></i> correo@jalcomuna11.gov.co</li>
+                                                    <li><i class="fa-solid fa-phone text-institucional me-2"></i> (604) XXX XX XX</li>
+                                                </ul>
+                                                <div class="d-flex justify-content-center gap-3">
+                                                    <a href="#" class="text-secondary" title="Correo"><i class="fa-regular fa-envelope fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Twitter / X"><i class="fa-brands fa-x-twitter fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Facebook"><i class="fa-brands fa-facebook fs-5"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Integrante 2 -->
+                                    <div class="col">
+                                        <div class="card info-card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center">
+                                            <img src="https://placehold.co/400x400/0033a0/FFF?text=Foto"
+                                                class="card-img-top" alt="Foto del edil">
+                                            <div class="card-body p-4">
+                                                <h4 class="h6 fw-bold mb-1">Nombre del Edil</h4>
+                                                <p class="text-institucional small fw-bold mb-2">Vicepresidente</p>
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill mb-3">Movimiento / Partido</span>
+                                                <ul class="list-unstyled small text-muted d-flex flex-column gap-2 mb-3 text-start">
+                                                    <li><i class="fa-solid fa-envelope text-institucional me-2"></i> correo@jalcomuna11.gov.co</li>
+                                                    <li><i class="fa-solid fa-phone text-institucional me-2"></i> (604) XXX XX XX</li>
+                                                </ul>
+                                                <div class="d-flex justify-content-center gap-3">
+                                                    <a href="#" class="text-secondary" title="Correo"><i class="fa-regular fa-envelope fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Twitter / X"><i class="fa-brands fa-x-twitter fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Facebook"><i class="fa-brands fa-facebook fs-5"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Integrante 3 -->
+                                    <div class="col">
+                                        <div class="card info-card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center">
+                                            <img src="https://placehold.co/400x400/0033a0/FFF?text=Foto"
+                                                class="card-img-top" alt="Foto del edil">
+                                            <div class="card-body p-4">
+                                                <h4 class="h6 fw-bold mb-1">Nombre del Edil</h4>
+                                                <p class="text-institucional small fw-bold mb-2">Edil</p>
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill mb-3">Movimiento / Partido</span>
+                                                <ul class="list-unstyled small text-muted d-flex flex-column gap-2 mb-3 text-start">
+                                                    <li><i class="fa-solid fa-envelope text-institucional me-2"></i> correo@jalcomuna11.gov.co</li>
+                                                    <li><i class="fa-solid fa-phone text-institucional me-2"></i> (604) XXX XX XX</li>
+                                                </ul>
+                                                <div class="d-flex justify-content-center gap-3">
+                                                    <a href="#" class="text-secondary" title="Correo"><i class="fa-regular fa-envelope fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Twitter / X"><i class="fa-brands fa-x-twitter fs-5"></i></a>
+                                                    <a href="#" class="text-secondary" title="Facebook"><i class="fa-brands fa-facebook fs-5"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CONTENIDO 4: Planeación -->
+                            <div class="tab-pane fade" id="planeacion" role="tabpanel"
+                                aria-labelledby="planeacion-tab" tabindex="0">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">Sección 4</span>
+                                <h2 class="fw-bold text-institucional mb-2">Por definir</h2>
+                                <div class="bg-institucional rounded-pill mb-4" style="width: 60px; height: 4px;"></div>
+                                <p class="text-muted mb-4">
+                                    Informes de gestión y distribución del presupuesto participativo de la comuna.
+                                </p>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card info-card border h-100 rounded-3 shadow-sm text-center">
+                                            <div class="card-body p-4">
+                                                <i class="fa-solid fa-coins text-institucional fs-2 mb-2"></i>
+                                                <h3 class="h6 fw-bold">Presupuesto Participativo</h3>
+                                                <p class="small text-muted mb-0">Distribución de recursos priorizados por la comunidad.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card info-card border h-100 rounded-3 shadow-sm text-center">
+                                            <div class="card-body p-4">
+                                                <i class="fa-solid fa-clipboard-list text-institucional fs-2 mb-2"></i>
+                                                <h3 class="h6 fw-bold">Informes de Gestión</h3>
+                                                <p class="small text-muted mb-0">Resultados y avances de la corporación.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (conservado de indesx2.html / index.html) -->
+    <footer class="bg-dark text-white pt-5 pb-4 border-top border-4 border-primary mt-auto">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fa-solid fa-landmark fs-3 text-white"></i>
+                        <span class="fw-bold fs-5">JAL Comuna 11</span>
+                    </div>
+                    <p class="text-secondary small leading-relaxed">
+                        Sitio web oficial de la Junta Administradora Local de la Comuna 11. Trabajando por la
+                        transparencia, la gestión eficiente y el desarrollo de nuestro territorio.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Enlaces
+                        Institucionales</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><a href="https://www.medellin.gov.co" target="_blank"
+                                class="text-secondary text-decoration-none">Alcaldía de Medellín</a></li>
+                        <li><a href="https://www.concejodemedellin.gov.co" target="_blank"
+                                class="text-secondary text-decoration-none">Concejo de Medellín</a></li>
+                        <li><a href="Significadojal.html#integrantes" class="text-secondary text-decoration-none">Directorio de Ediles</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6 fw-bold mb-3 text-uppercase border-bottom border-secondary pb-2">Atención al Ciudadano</h3>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
+                        <li><i class="fa-solid fa-map-location-dot me-2"></i> Medellín, Antioquia</li>
+                        <li><i class="fa-solid fa-clock me-2"></i> Lunes a Viernes 8:00 AM - 5:00 PM</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> contacto@jalcomuna11.gov.co</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-3 text-center text-secondary small">
+                <p class="mb-0">&copy; 2026 JAL Comuna 11 - Medellín. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT DE ACTIVACIÓN Y NAVEGACIÓN DE PESTAÑAS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Activa una pestaña dado su hash (ej: "#integrantes") y sube al inicio.
+            function activarPestana(hash) {
+                if (!hash) return;
+
+                let botonPestana = document.querySelector('button[data-bs-target="' + hash + '"]');
+
+                if (botonPestana) {
+                    let tab = new bootstrap.Tab(botonPestana);
+                    tab.show();
+
+                    // 👇 Evita que el navegador deje la página desplazada hacia abajo.
+                    setTimeout(function () {
+                        window.scrollTo({ top: 0, behavior: 'instant' });
+                    }, 0);
+                }
+            }
+
+            // 1. Activa la pestaña al cargar la página si hay hash en la URL
+            activarPestana(window.location.hash);
+
+            // 2. Escucha cambios en el hash (cuando el hash SÍ cambia respecto al anterior)
+            window.addEventListener("hashchange", function () {
+                activarPestana(window.location.hash);
+            });
+
+            // 3. Mantén la URL sincronizada con la pestaña activa.
+            //    Cuando Bootstrap muestra una pestaña, actualizamos el hash SIN disparar
+            //    el salto del navegador (usando history.replaceState).
+            document.querySelectorAll('#v-pills-tab button[data-bs-toggle="pill"]').forEach(function (boton) {
+                boton.addEventListener("shown.bs.tab", function (e) {
+                    let target = e.target.getAttribute("data-bs-target"); // ej: "#funciones"
+                    if (target) {
+                        history.replaceState(null, "", target);
+                    }
+                });
+            });
+
+            // 4. Soluciona el caso del clic repetido al MISMO hash (ej: estás en #funciones
+            //    pero la URL sigue en #integrantes y vuelves a dar clic en "Integrantes").
+            //    Como el hash no cambia, hashchange no se dispara; aquí lo forzamos.
+            document.querySelectorAll('a[href*="#"]').forEach(function (enlace) {
+                enlace.addEventListener("click", function () {
+                    let href = enlace.getAttribute("href");
+                    let hash = href.substring(href.indexOf("#")); // extrae "#loquesea"
+
+                    // Solo actúa si ese hash corresponde a una pestaña de ESTA página
+                    if (document.querySelector('button[data-bs-target="' + hash + '"]')) {
+                        activarPestana(hash);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
